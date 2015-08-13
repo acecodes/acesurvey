@@ -13,3 +13,96 @@
  * always omit, customize, or replace this behavior with SASS, SCSS,
  * or any other Grunt tasks you like.)
  */
+.jumbotron {
+  text-align: center;
+}
+.jumbotron h2 {
+  font-size: 1.5em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: gray;
+}
+.alert {
+  position: absolute;
+}
+form .glyphicon {
+  top: 0;
+}
+.input-group {
+  width: 100%;
+}
+.form-signin {
+  position: relative;
+  max-width: 30%;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  margin-top: 20px;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.signinError {
+  right: 67px;
+  top: 53px;
+  z-index: 100;
+}
+.navbar-nav.navbar-right:last-child {
+  margin-right: 2px;
+}
+.gravatarSm {
+  line-height: 3.5;
+}
+.pointer {
+  cursor: pointer;
+}
+.acesurvey-loading-spinner {
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/**
+ * Just a handful of helper mixins for doing cool CSS animations.
+ */
