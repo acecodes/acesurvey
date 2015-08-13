@@ -18,6 +18,10 @@ module.exports = {
             // An unexpected error occurred.
             error: function(err) {
                 res.negotiate(err);
+
+                return res.json({
+                    error: err
+                });
             },
             // OK.
             success: function(encryptedPassword) {

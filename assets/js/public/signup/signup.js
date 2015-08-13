@@ -10,7 +10,7 @@
 
     SignUpController.$inject = ['signUpFactory'];
 
-    var app = angular.module('signup', ['toastr', 'compareTo', 'restangular'])
+    var app = angular.module('signup', ['compareTo', 'restangular'])
         .directive('signupdata', [
 
             function() {
@@ -43,7 +43,10 @@
                         },
                         function(err) {
                             console.log('Didn\'t work. Error: ', err);
-                        });
+                        })
+                    .finally(function whateverHappens() {
+                        scope.signUpForm.loading = false;
+                    });
                 }
 
                 return {
