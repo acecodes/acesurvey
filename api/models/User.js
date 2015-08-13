@@ -7,12 +7,33 @@
 
 module.exports = {
   attributes: {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+        unique: true
+    },
     name: {
       type: Sequelize.STRING,
       allowNull: false
     },
     title: {
       type: Sequelize.STRING
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    admin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
   },
   options: {
