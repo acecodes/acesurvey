@@ -1,5 +1,7 @@
-"hooks": {
-  "blueprints": false,
-  "orm": false,
-  "pubsub": false
+{
+  "hooks": {
+    "blueprints": false,
+    "orm": false,
+    "pubsub": false
+  }
 }
