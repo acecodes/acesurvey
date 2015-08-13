@@ -12,7 +12,8 @@ module.exports = {
 
         // Encrypt a string using the BCrypt algorithm.
         Passwords.encryptPassword({
-            password: req.param('password'),
+            password: req.body.password,
+            difficulty: 10,
         }).exec({
             // An unexpected error occurred.
             error: function(err) {
@@ -21,12 +22,16 @@ module.exports = {
             // OK.
             success: function(encryptedPassword) {
                 User.create({
-                    name: req.param('name'),
-                    title: req.param('title'),
-                    email: req.param('email'),
+                    name: req.body.name,
+                    title: req.body.title,
+                    email: req.body.email,
                     password: encryptedPassword,
-                    admin: req.param('admin')
-                })
+                    admin: req.body.admin
+                });
+
+                return res.json({
+                    msg: 'New user created.'
+                });
             },
         });
     }

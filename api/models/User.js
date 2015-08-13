@@ -11,12 +11,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        required: true,
         allowNull: false,
         unique: true
     },
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      required: true
     },
     title: {
       type: Sequelize.STRING
@@ -24,14 +26,17 @@ module.exports = {
     email: {
         type: Sequelize.STRING,
         allowNull: false,
+        required: true,
         unique: true
     },
     password: {
         type: Sequelize.STRING,
+        required: true,
         allowNull: false
     },
     admin: {
         type: Sequelize.BOOLEAN,
+        required: true,
         allowNull: false,
         defaultValue: false
     }
