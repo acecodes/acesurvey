@@ -52,7 +52,7 @@
 
         <div class="container-fluid">
         <!-- SIGNUP FORM -->
-        <form ng-submit="app.submitSignUpForm(app)" id="sign-up-form" class="form-signin" name="signup">
+        <form ng-submit="app.submitSignUpForm(app, signupForm.name, signupForm.title, signupForm.email, signupForm.password, signupForm.admin)" id="sign-up-form" class="form-signin" name="signup">
             <h2 class="form-signin-heading">Create an account</h2>
             <div class="row">
                 <!-- N A M E -->
@@ -115,6 +115,14 @@
                         <span ng-show="signup.confirmation.$error.required">Confirmation password is required.</span>
                     </span>
                 </div>
+                <!-- ADMIN? -->
+                <div class="control-group form-group col-md-6">
+                    <label>Would you like to be an admin?</label>
+                    <select class="form-control" name="admin" ng-model="signupForm.admin" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    </select>
+                </div>
             </div>
             <br/>
             <!-- Disable signup button until the form has no errors -->
@@ -141,6 +149,8 @@
         <script src="/js/dependencies/angular-toastr.min.js"></script>
         <script src="/js/dependencies/bootstrap.min.js"></script>
         <script src="/js/dependencies/compareto.js"></script>
+        <script src="/js/dependencies/lodash.min.js"></script>
+        <script src="/js/dependencies/restangular.min.js"></script>
         <script src="/js/public/signup/signup.js"></script>
         <!--SCRIPTS END-->
     </body>

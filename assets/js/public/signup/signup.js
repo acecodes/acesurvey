@@ -10,7 +10,7 @@
 
     SignUpController.$inject = ['signUpFactory'];
 
-    var app = angular.module('signup', ['toastr', 'compareTo'])
+    var app = angular.module('signup', ['toastr', 'compareTo', 'restangular'])
         .directive('signupdata', [
 
             function() {
@@ -21,13 +21,29 @@
                 };
             }
         ])
-        .factory('signUpFactory', [
+        .factory('signUpFactory', ['Restangular',
 
-            function() {
+            function(Restangular) {
 
-                function submitSignUpForm(scope) {
+                var APIURL = 'http://localhost:1337/';
+                var API = Restangular.setBaseUrl(APIURL);
+
+                function submitSignUpForm(scope, name, title, email, password, admin) {
                     scope.signUpForm.loading = true;
-                    console.log('Clicked');
+                    var signUpEndPoint = Restangular.all('signup/');
+
+                    signUpEndPoint.post({
+                        'name': name,
+                        'title': title,
+                        'email': email,
+                        'password': password,
+                        'admin': admin
+                    }).then(function(success) {
+                            console.log(success);
+                        },
+                        function(err) {
+                            console.log('Didn\'t work. Error: ', err);
+                        });
                 }
 
                 return {

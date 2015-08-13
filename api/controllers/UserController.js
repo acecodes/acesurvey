@@ -26,7 +26,7 @@ module.exports = {
                     title: req.body.title,
                     email: req.body.email,
                     password: encryptedPassword,
-                    admin: req.body.admin
+                    admin: !!Number(req.body.admin)
                 });
 
                 return res.json({
