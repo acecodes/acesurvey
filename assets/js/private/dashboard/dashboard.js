@@ -31,7 +31,8 @@
                     $http.post('/question', {
                         title: title
                     }).then(function success(question) {
-                        scope.questions.push(question);
+                        console.log(question);
+                        scope.questions.push(question.data);
                     }).catch(function failure(err) {
                         console.log(err);
                     });

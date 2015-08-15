@@ -12,9 +12,7 @@ module.exports = {
             title: req.param('title'),
         }).then(function(newQuestion) {
 
-            return res.json({
-                id: newQuestion.id
-            });
+            return res.json(newQuestion);
         }).catch(function(err) {
             res.json(err);
             return res.serverError();
