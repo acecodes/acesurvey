@@ -31,6 +31,16 @@ module.exports = {
         }).catch(function(err) {
             res.json(err);
         });
+    },
+
+    deleteQuestion: function(req, res) {
+        Question.destroy({
+            where: { id: req.param('id') }
+        }).then(function (deleted) {
+            return res.json({'msg': 'Successfully deleted'});
+        }).catch(function (err) {
+            return res.json(err);
+        });
     }
 
 };

@@ -51,6 +51,7 @@ module.exports.routes = {
   'GET /response': 'ResponseController.getResponses',
   'POST /response': 'ResponseController.newResponse',
   'POST /question': 'QuestionController.newQuestion',
+  'DELETE /question': 'QuestionController.deleteQuestion',
   'POST /answer': 'AnswerController.newAnswer'
 
   // '/': {

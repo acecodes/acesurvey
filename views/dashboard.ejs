@@ -25,7 +25,10 @@
                 <h1>Admin Dashboard</h1>
                 <h2>Questions</h2>
                 <div ng-repeat='i in dashboard.questions'>
-                    <div><h3>{{ i.title }}</h3> <a href="#" ng-click="dashboard.deleteQuestion(dashboard, i.id)">Delete</a></div>
+                    <div>
+                        <h3>{{ i.title }}</h3>
+                        <a href="#" ng-click="dashboard.deleteQuestion(dashboard, i.id)">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,6 +37,7 @@
         <script src="/js/dependencies/angular.min.js"></script>
         <script src="/js/dependencies/angular-toastr.js"></script>
         <script src="/js/dependencies/compareTo.module.js"></script>
+        <script src="/js/dependencies/lodash.js"></script>
         <script src="/js/public/global/angular.ng-modules.js"></script>
         <script src="/js/public/global/global.js"></script>
         <script src="/js/public/signup/signup.js"></script>

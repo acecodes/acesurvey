@@ -26,12 +26,14 @@
         ])
         .factory('dashboardFactory', ['$http',
             function($http) {
-                
+
                 function createQuestion(scope, title) {
-                    $http.post('/question', { title: title }).then(function success(question) {
-                        return res.json(question);
+                    $http.post('/question', {
+                        title: title
+                    }).then(function success(question) {
+                        scope.questions.push(question);
                     }).catch(function failure(err) {
-                        return res.json(err);
+                        console.log(err);
                     });
                 }
 
@@ -42,7 +44,24 @@
                 }
 
                 function deleteQuestion(scope, questionId) {
-                    console.log(scope.questions.data.qaSets);
+
+                    $http.delete('/question', {
+                        params: {id: questionId}
+                    }).then(function success(deleted) {
+                        console.log(deleted);
+                        var arr = scope.questions;
+                        var len = arr.length;
+
+                        for (var i = 0; i < len; i++) {
+                            if (arr[i].id === questionId) {
+                                arr.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }).catch(function error(err) {
+                        console.log(err);
+                    });
+
                 }
 
                 return {
