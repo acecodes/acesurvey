@@ -15,7 +15,12 @@ module.exports = {
         }
     },
     associations: function() {
-        Question.hasMany(Answer, {foreignKey: 'question'});
+        Question.hasMany(Answer, {
+            foreignKey: 'question'
+        });
+        Question.hasOne(Response, {
+            foreignKey: 'question'
+        });
     },
     options: {
         tableName: 'question'

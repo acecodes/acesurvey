@@ -20,14 +20,15 @@ module.exports = {
             return res.serverError();
         });
     },
+
     getQA: function(req, res) {
         Question.findAll({
             include: [{
                 model: Answer
             }]
         }).then(function(qa) {
-            res.json(qa);
-        }, function(err) {
+            return res.json(qa);
+        }).catch(function(err) {
             res.json(err);
         });
     }

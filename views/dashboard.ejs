@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AceSurvey | Welcome back, <%= me.name %>!</title>
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!--STYLES-->
-    <link rel="stylesheet" href="/styles/angular-toastr.css">
-    <link rel="stylesheet" href="/styles/bootstrap.3.1.1.css">
-    <link rel="stylesheet" href="/styles/importer.css">
-    <!--STYLES END-->
-    <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
-    <script type="text/javascript">
-    window.SAILS_LOCALS = {
-      _csrf: '<%= _csrf %>',
-      me: <%- JSON.stringify(me) %>
-    };
-    </script>
-  </head>
-  <body ng-modules="dashboard, globals" dashboarddata ng-cloak>
-
-    <!-- container = Fixed-width container container-fluid = full-width -->
-    <div class="container-fluid">
-      <dashboardnav></dashboardnav>
-
-      <h1>This is the Dashboard</h1>
-      <div ng-if="<%= me.isAdmin %>">Testing</div>
-
-    </div>
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/dependencies/angular.min.js"></script>
-    <script src="/js/dependencies/angular-toastr.js"></script>
-    <script src="/js/dependencies/compareTo.module.js"></script>
-    <script src="/js/public/global/angular.ng-modules.js"></script>
-    <script src="/js/public/global/global.js"></script>
-    <script src="/js/public/signup/signup.js"></script>
-    <script src="/js/private/dashboard/dashboard.js"></script>
-    <script src="/js/public/homepage/homepage.js"></script>
-    <!--SCRIPTS END-->
-
-  </body>
+    <head>
+        <title>AceSurvey | Welcome back, <%= me.name %>!</title>
+        <!-- Viewport mobile tag for sensible mobile support -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!--STYLES-->
+        <link rel="stylesheet" href="/styles/angular-toastr.css">
+        <link rel="stylesheet" href="/styles/bootstrap.3.1.1.css">
+        <link rel="stylesheet" href="/styles/importer.css">
+        <!--STYLES END-->
+        <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
+        <script type="text/javascript">
+        window.SAILS_LOCALS = {
+        _csrf: '<%= _csrf %>',
+        me: <%- JSON.stringify(me) %>
+        };
+        </script>
+    </head>
+    <body ng-modules="dashboard, globals" dashboarddata ng-cloak>
+        <!-- container = Fixed-width container container-fluid = full-width -->
+        <div class="container-fluid">
+            <dashboardnav></dashboardnav>
+            <div ng-if="<%= me.isAdmin %>">
+                <h1>Admin Dashboard</h1>
+                <h2>Questions</h2>
+                <div ng-repeat='i in dashboard.questions'>
+                    <div><h3>{{ i.title }}</h3> <a href="#" ng-click="dashboard.deleteQuestion(dashboard, i.id)">Delete</a></div>
+                </div>
+            </div>
+        </div>
+        <!--SCRIPTS-->
+        <script src="/js/dependencies/sails.io.js"></script>
+        <script src="/js/dependencies/angular.min.js"></script>
+        <script src="/js/dependencies/angular-toastr.js"></script>
+        <script src="/js/dependencies/compareTo.module.js"></script>
+        <script src="/js/public/global/angular.ng-modules.js"></script>
+        <script src="/js/public/global/global.js"></script>
+        <script src="/js/public/signup/signup.js"></script>
+        <script src="/js/private/dashboard/dashboard.js"></script>
+        <script src="/js/public/homepage/homepage.js"></script>
+        <!--SCRIPTS END-->
+    </body>
 </html>

@@ -48,6 +48,8 @@ module.exports.routes = {
   'PUT /login': 'UserController.login',
   'GET /logout': 'UserController.logout',
   'GET /qa': 'QuestionController.getQA',
+  'GET /response': 'ResponseController.getResponses',
+  'POST /response': 'ResponseController.newResponse',
   'POST /question': 'QuestionController.newQuestion',
   'POST /answer': 'AnswerController.newAnswer'
 

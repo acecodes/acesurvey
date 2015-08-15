@@ -14,6 +14,11 @@ module.exports = {
             allowNull: false
         }
     },
+    associations: function() {
+        Answer.hasOne(Response, {
+            foreignKey: 'answer'
+        });
+    },
     options: {
         tableName: 'answer'
     }
