@@ -19,6 +19,15 @@ module.exports = {
             res.json(err);
             return res.serverError();
         });
+    },
+    deleteAnswer: function(req, res) {
+        Answer.destroy({
+            where: { id: req.param('id') }
+        }).then(function (deleted) {
+            return res.json({'msg': 'Successfully deleted'});
+        }).catch(function (err) {
+            return res.json(err);
+        });
     }
 };
 

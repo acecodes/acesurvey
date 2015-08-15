@@ -8,6 +8,7 @@
         this.createQuestion = dashboardFactory.createQuestion;
         this.getQAs = dashboardFactory.getQAs;
         this.deleteQuestion = dashboardFactory.deleteQuestion;
+        this.deleteAnswer = dashboardFactory.deleteAnswer;
     }
 
     DashboardController.$inject = ['dashboardFactory'];
@@ -47,7 +48,9 @@
                 function deleteQuestion(scope, questionId) {
 
                     $http.delete('/question', {
-                        params: {id: questionId}
+                        params: {
+                            id: questionId
+                        }
                     }).then(function success(deleted) {
                         console.log(deleted);
                         var arr = scope.questions;
@@ -65,10 +68,42 @@
 
                 }
 
+                function deleteAnswer(scope, questionId, answerId) {
+
+                    var arr = scope.questions;
+                    var len = arr.length;
+
+                    $http.delete('/answer', {
+                        params: {
+                            id: answerId
+                        }
+                    }).then(function success(deleted) {
+                        console.log(deleted);
+                        var arr = scope.questions;
+                        var len = arr.length;
+
+                        for (var i = 0; i < len; i++) {
+                            if (arr[i].id === questionId) {
+                                var answers = arr[i].Answers;
+                                for (var j = 0; j < answers.length; j++) {
+                                    if (answers[j].id === answerId) {
+                                        answers.splice(j, 1);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }).catch(function error(err) {
+                        console.log(err);
+                    });
+
+                }
+
                 return {
                     createQuestion: createQuestion,
                     getQAs: getQAs,
-                    deleteQuestion: deleteQuestion
+                    deleteQuestion: deleteQuestion,
+                    deleteAnswer: deleteAnswer
                 };
             }
         ]);
