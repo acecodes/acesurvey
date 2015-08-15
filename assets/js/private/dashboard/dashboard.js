@@ -6,6 +6,7 @@
         this.questionsSeen = [];
         this.questions = dashboardFactory.getQAs(this);
         this.createQuestion = dashboardFactory.createQuestion;
+        this.createAnswer = dashboardFactory.createAnswer;
         this.getQAs = dashboardFactory.getQAs;
         this.deleteQuestion = dashboardFactory.deleteQuestion;
         this.deleteAnswer = dashboardFactory.deleteAnswer;
@@ -68,6 +69,30 @@
 
                 }
 
+                function createAnswer(scope, questionId, answer) {
+                    $http.post('/answer', {
+                        question: questionId,
+                        answer: answer
+                    }).then(function success(answer) {
+                        var arr = scope.questions;
+                        var len = arr.length;
+                        for (var i = 0; i < len; i++) {
+                            if (arr[i].id === questionId) {
+
+                                if (arr[i].Answers === undefined) {
+                                    arr[i].Answers = [];
+                                }
+
+                                var answers = arr[i].Answers;
+                                answers.push(answer.data);
+                                break;
+                            }
+                        }
+                    }).catch(function failure(err) {
+                        console.log(err);
+                    });
+                }
+
                 function deleteAnswer(scope, questionId, answerId) {
 
                     var arr = scope.questions;
@@ -101,6 +126,7 @@
 
                 return {
                     createQuestion: createQuestion,
+                    createAnswer: createAnswer,
                     getQAs: getQAs,
                     deleteQuestion: deleteQuestion,
                     deleteAnswer: deleteAnswer

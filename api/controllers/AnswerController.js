@@ -6,15 +6,13 @@
  */
 
 module.exports = {
-	newAnswer: function (req, res) {
+    newAnswer: function(req, res) {
         Answer.create({
             answer: req.param('answer'),
             question: req.param('question')
         }).then(function(newAnswer) {
 
-            return res.json({
-                id: newAnswer.id
-            });
+            return res.json(newAnswer);
         }).catch(function(err) {
             res.json(err);
             return res.serverError();
@@ -22,12 +20,15 @@ module.exports = {
     },
     deleteAnswer: function(req, res) {
         Answer.destroy({
-            where: { id: req.param('id') }
-        }).then(function (deleted) {
-            return res.json({'msg': 'Successfully deleted'});
-        }).catch(function (err) {
+            where: {
+                id: req.param('id')
+            }
+        }).then(function(deleted) {
+            return res.json({
+                'msg': 'Successfully deleted'
+            });
+        }).catch(function(err) {
             return res.json(err);
         });
     }
 };
-

@@ -32,30 +32,34 @@
                 <div ng-repeat='i in dashboard.questions'>
                     <div>
                         <h3>{{ i.title }}</h3>
-                        <p><a href="#" ng-click="dashboard.deleteQuestion(dashboard, i.id)">Delete</a></p>
+                        <p><a href="" ng-click="dashboard.deleteQuestion(dashboard, i.id)">Delete</a></p>
                         <p>Answers:</p>
                         <div ng-repeat="j in i.Answers">
-                        <ul>
-                            <li>{{ j.answer }}
-                            <p><a href="#" ng-click="dashboard.deleteAnswer(dashboard, i.id, j.id)">Delete</a></p>
-                            </li>
+                            <ul>
+                                <li>{{ j.answer }}
+                                    <p><a href="" ng-click="dashboard.deleteAnswer(dashboard, i.id, j.id)">Delete</a></p>
+                                </li>
+                            </div>
+                            <h3>Add a new answer:</h3>
+                                <form ng-submit="dashboard.createAnswer(dashboard, i.id, answer.text)" class="form-signin" name="create-answer">
+                                    <input ng-model="answer.text">
+                                    <input type="submit"></form>
+                                </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/dependencies/angular.min.js"></script>
-    <script src="/js/dependencies/angular-toastr.js"></script>
-    <script src="/js/dependencies/compareTo.module.js"></script>
-    <script src="/js/dependencies/lodash.js"></script>
-    <script src="/js/public/global/angular.ng-modules.js"></script>
-    <script src="/js/public/global/global.js"></script>
-    <script src="/js/public/signup/signup.js"></script>
-    <script src="/js/private/dashboard/dashboard.js"></script>
-    <script src="/js/public/homepage/homepage.js"></script>
-    <!--SCRIPTS END-->
-</body>
+        <!--SCRIPTS-->
+        <script src="/js/dependencies/sails.io.js"></script>
+        <script src="/js/dependencies/angular.min.js"></script>
+        <script src="/js/dependencies/angular-toastr.js"></script>
+        <script src="/js/dependencies/compareTo.module.js"></script>
+        <script src="/js/public/global/angular.ng-modules.js"></script>
+        <script src="/js/public/global/global.js"></script>
+        <script src="/js/public/signup/signup.js"></script>
+        <script src="/js/private/dashboard/dashboard.js"></script>
+        <script src="/js/public/homepage/homepage.js"></script>
+        <!--SCRIPTS END-->
+    </body>
 </html>
