@@ -17,7 +17,7 @@
  * CoffeeScript for the front-end.
  *
  * For more information on configuring custom routes, check out:
- * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
+ * http://sailsjs.org/#/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
 module.exports.routes = {
@@ -32,21 +32,31 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /signup': {
-    view: 'signup'
-  },
-  
-  'POST /signup': 'UserController.signup',
+  ////////////////////////////////////////////////////////////
+  // Server-rendered HTML webpages
+  ////////////////////////////////////////////////////////////
 
-  'GET /': {
-    view: 'homepage'
-  }
+  'GET /signup': {view: 'signup'},
+  'GET /': 'PageController.showHomePage',
+
+  ////////////////////////////////////////////////////////////
+  // JSON API
+  ////////////////////////////////////////////////////////////
+
+  // User enrollment + authentication
+  'POST /signup': 'UserController.signup',
+  'PUT /login': 'UserController.login',
+  'GET /logout': 'UserController.logout'
+
+  // '/': {
+  //   view: 'homepage'
+  // }
 
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
   *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
+  *  If a request to a URL doesn't match any of the custom routes above, it  *
   * is matched against Sails route blueprints. See `config/blueprints.js`    *
   * for configuration options and examples.                                  *
   *                                                                          *

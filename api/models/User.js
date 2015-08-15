@@ -5,47 +5,44 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
+var Sequelize = require('sequelize');
+
 module.exports = {
+
   attributes: {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        required: true,
-        allowNull: false,
-        unique: true
-    },
+
+    // The user's full name
+    // e.g. Nikola Tesla
     name: {
       type: Sequelize.STRING,
-      allowNull: false,
       required: true
     },
+
+    // The user's title at their job (or something)
+    // e.g. Genius
     title: {
       type: Sequelize.STRING
     },
+
+    // The user's email address
+    // e.g. nikola@tesla.com
     email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true,
-        unique: true
+      type: Sequelize.STRING,
+      email: true,
+      required: true,
+      unique: true
     },
+
+    // The encrypted password for the user
+    // e.g. asdgh8a249321e9dhgaslcbqn2913051#T(@GHASDGA
     password: {
-        type: Sequelize.STRING,
-        required: true,
-        allowNull: false
+      type: Sequelize.STRING,
+      required: true
     },
     admin: {
-        type: Sequelize.BOOLEAN,
-        required: true,
-        allowNull: false,
-        defaultValue: false
+      type: Sequelize.BOOLEAN,
+      required: true
     }
-  },
-  options: {
-    tableName: 'user',
-    classMethods: {},
-    instanceMethods: {},
-    hooks: {}
   }
 };
 

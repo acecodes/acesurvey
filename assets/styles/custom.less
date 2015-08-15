@@ -16,6 +16,7 @@
   position: absolute;
 }
 
+ // remove 1px offset glyphicons have
 form .glyphicon {
     top: 0;
 }
@@ -33,6 +34,9 @@ margin-top: 20px;
 
 }
 
+/*This is one way to get ng-cloak to work without having to put angular.js loaded at the top of the page.
+Without this angular would not be loaded yet, so it won't recognize ng-cloak.  This is the css that angular
+will ultimately load to make the ng-cloak display none until $compile thing runs. */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
@@ -43,7 +47,7 @@ margin-top: 20px;
  z-index: 100;
 }
 
-
+/* This moves the signin form over a bit. */
 .navbar-nav.navbar-right:last-child {
 margin-right: 2px;
 }
@@ -52,7 +56,10 @@ margin-right: 2px;
  line-height: 3.5;
 }
 
-
+/* This changes the cursor to a pointer */
 .pointer {
     cursor: pointer;
 }
+
+
+
