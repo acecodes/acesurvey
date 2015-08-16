@@ -180,6 +180,7 @@
                         }
                     }).then(function success(success) {
                         scope.responses = success.data;
+                        console.log(success.data);
                     });
                 }
 

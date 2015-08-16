@@ -29,10 +29,14 @@
                         <h3>Add a new question:</h3>
                         <form ng-submit="dashboard.createQuestion(dashboard, question.text)" id="create-question-form" class="" name="create-question">
                             <input ng-model="question.text">
-                            <input type="submit">
+                            <input type="submit" class="btn btn-default">
                         </form>
 
-                        <div ng-if="dashboard.responses">{{ dashboard.responses }}</div>
+                        <div ng-if="dashboard.responses">
+                            <div class="responses" ng-repeat="response in dashboard.responses">
+                            <p>Total responses: {{ dashboard.responses.length }}</p> 
+                            Answer: {{ response.answerTexts }}, User: {{ response.user }}</div>
+                        </div>
                     </div>
                     
                     <!-- QUESTIONS -->
@@ -44,21 +48,21 @@
                                 <a href="" ng-click="dashboard.deleteQuestion(dashboard, q.id)"><span class="glyphicon glyphicon-remove"></span></a>
                             </p>
                             <form ng-submit="dashboard.checkResponses(dashboard, q.id)" class="" name="create-answer">
-                                <input type="submit">
+                                <button class="btn btn-default" type="submit">Check Responses</button>
                             </form>
                             <div class="check-answers">
-                                <button><label for="{{q.id}}">Edit Answers</label></button>
+                                <button class="btn btn-default"><label for="{{q.id}}">Edit Answers</label></button>
                             </div>
                             <input id="{{q.id}}" type=checkbox><div style="display: none;">
                             <h5>Add a new answer:</h5>
                             <form ng-submit="dashboard.createAnswer(dashboard, q.id, answer.text)" class="" name="create-answer">
                                 <input ng-model="answer.text">
-                                <input type="submit">
+                                <button class="btn btn-default" type="submit">Add</button>
                             </form>
                             <p class="answers-title">Answers:</p>
                             <div ng-repeat="ans in q.Answers">
                                 <ul>
-                                    <li>{{ ans.answer }}
+                                    <li>{{ ans.answer }} (id: {{ ans.id }})
                                         <a href="" ng-click="dashboard.deleteAnswer(dashboard, q.id, ans.id)"><span class="glyphicon glyphicon-remove"></span></a>
                                     </li>
                                 </ul>
