@@ -41,6 +41,37 @@ margin-top: 20px;
 
 }
 
+a {
+    color: #166EE0;
+}
+
+a:hover, a:focus {
+    color: #1179B4;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #1179B4;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #1179B4;
+}
+
+
+.btn-success {
+    color: #FFF;
+    background-color: #184EBC;
+    border-color: #2047D2;
+}
+
+.btn-success:hover {
+    color: #FFF;
+    background-color: #1E75D8;
+    border-color: #3665EF;
+}
+
+
+
 /*This is one way to get ng-cloak to work without having to put angular.js loaded at the top of the page.
 Without this angular would not be loaded yet, so it won't recognize ng-cloak.  This is the css that angular
 will ultimately load to make the ng-cloak display none until $compile thing runs. */
@@ -77,10 +108,15 @@ margin-right: 2px;
 }
 
 .question-item {
-    background-color: #D8DEEE;
+    background-color: #00254E;
     padding:5%;
     margin:5% 0;
     font-size:1.5em;
+    color: white;
+}
+
+.delete-question {
+    color: #BD5A5A;
 }
 
 [type=checkbox] {
@@ -99,5 +135,40 @@ margin-right: 2px;
     margin:2% 0;
 }
 
+.question-present {
+    text-align: center;
+}
 
+.question-answer {
+    font-size: 1.8em;
+}
 
+h1#question-title {
+    font-size: 3.0em
+}
+
+h2#admin-question-title {
+    text-align: center;
+}
+
+.qa-unit {
+    background: #BCE5FF;
+    text-align: center;
+    padding: 1% 0%;
+    margin-bottom: 5%;
+    border-radius: 5%;
+}
+
+.answer-box {
+    padding-bottom: 2%;
+}
+
+th {
+    text-align: center;
+}
+
+.done {
+    text-align: center;
+    font-size: 1.4em;
+    padding: 5%;
+}
