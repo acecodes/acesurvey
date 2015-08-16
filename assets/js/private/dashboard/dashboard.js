@@ -8,6 +8,7 @@
         this.questionsList = [];
         this.done = false;
         this.responses = false;
+        this.userId = window.SAILS_LOCALS.me.id;
 
         this.adminQuestionsList = dashboardFactory.getQAs(this);
         this.createQuestion = dashboardFactory.createQuestion;
@@ -137,27 +138,20 @@
                         answer: answerId,
                         question: questionId,
                         user: userId
-                    }).then(function success(response) {
+                    }).then(function success(success) {
 
-                        var arr = scope.questionsList;
-                        var seen = scope.questionsSeen;
-                        var len = arr.length;
-
-                        seen.push(questionId);
-
-                        arr.shift();
-
-                        arr = _.shuffle(arr);
-
-                        scope.currentQuestion = arr[0];
-
-                        console.log(arr);
-                        if (arr.length === 0) {
+                        var qList = scope.questionsList;
+                        console.log(scope.questionsList);
+                        qList.shift();
+                        if (qList.length === 0) {
                             scope.done = true;
+                            console.log('Done');
+                        } else {
+                            scope.currentQuestion = qList[0];
                         }
 
 
-                        //console.log(response);
+
 
                     }).catch(function failure(err) {
                         console.log(err);
@@ -166,10 +160,50 @@
 
                 function presentQuestion(scope) {
 
+                    var userId = scope.userId;
+
                     $http.get('/qa').then(function success(QAs) {
-                        scope.questionsList = QAs.data;
-                        scope.questionsList = _.shuffle(scope.questionsList);
-                        scope.currentQuestion = scope.questionsList[0];
+                        $http.get('/user-response', {
+                            params: {
+                                user: userId
+                            }
+                        }).then(function(responses) {
+
+                            console.log(QAs.data);
+                            console.log(responses.data);
+
+                            var qa = QAs.data;
+                            var seen = scope.questionsSeen;
+                            var resp = responses.data;
+                            var len = resp.length;
+
+                            for (var i = 0; i < len; i++) {
+                                seen.push(resp[i].question);
+                            }
+
+                            var qaLen = qa.length;
+                            for (var j = 0; j < qaLen; j++) {
+                                if (qaLen > 0) {
+                                    for (var k = 0; k < seen.length; k++) {
+                                        if (qa[j] !== undefined && qa[j].id === seen[k]) {
+                                            qa.splice(1, j);
+                                        }
+                                    }
+                                } else {
+                                    scope.done = true;
+                                    break;
+                                }
+                            }
+
+
+                            console.log('Questions left:', qa.length);
+                            console.log('Questions seen:', scope.questionsSeen);
+
+                            scope.questionsList = _.shuffle(qa);
+                            scope.currentQuestion = scope.questionsList[0];
+
+
+                        });
                     });
                 }
 

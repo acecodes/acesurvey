@@ -31,11 +31,10 @@
                             <input ng-model="question.text">
                             <input type="submit" class="btn btn-default">
                         </form>
-
                         <div ng-if="dashboard.responses">
                             <div class="responses" ng-repeat="response in dashboard.responses">
-                            <p>Total responses: {{ dashboard.responses.length }}</p> 
-                            Answer: {{ response.answerTexts }}, User: {{ response.user }}</div>
+                                <p>Total responses: {{ dashboard.responses.length }}</p>
+                            Answer: {{ response.answer }}, User: {{ response.user }}</div>
                         </div>
                     </div>
                     
@@ -71,13 +70,15 @@
                     </div>
                 </div>
             </div>
-
             <div ng-if="<%= !me.isAdmin %>">
-            <div ng-if="dashboard.done"><h1>All done!</h1></div>
-            <h1>{{ dashboard.currentQuestion.title }}</h1>
-            <div ng-repeat="answer in dashboard.currentQuestion.Answers">
-            {{ answer.answer }} <a href="" ng-click="dashboard.submitResponse(dashboard, dashboard.currentQuestion.id, answer.id, <%= me.id %>)"><span class="glyphicon glyphicon-remove"></span></a>
-            </div>
+                <div ng-if="dashboard.done"><h1>All done!</h1></div>
+                <div ng-if="!dashboard.done">
+                <h1>{{ dashboard.currentQuestion.title }}</h1>
+                {{ dashboard.presentQuestion }}
+                    <div ng-repeat="answer in dashboard.currentQuestion.Answers">
+                        {{ answer.answer }} <a href="" ng-click="dashboard.submitResponse(dashboard, dashboard.currentQuestion.id, answer.id, <%= me.id %>)"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

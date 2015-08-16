@@ -33,5 +33,17 @@ module.exports = {
         }).catch(function(err) {
             res.json(err);
         });
+    },
+
+    getUserResponses: function(req, res) {
+        Response.findAll({
+            where: {
+                user: req.param('user')
+            },
+        }).then(function(responses) {
+            res.json(responses);
+        }).catch(function(err) {
+            res.json(err);
+        });
     }
 };

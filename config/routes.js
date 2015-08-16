@@ -45,15 +45,17 @@ module.exports.routes = {
 
   // User enrollment + authentication
   'POST /signup': 'UserController.signup',
+  'POST /answer': 'AnswerController.newAnswer',
+  'POST /response': 'ResponseController.newResponse',
+  'POST /question': 'QuestionController.newQuestion',
   'PUT /login': 'UserController.login',
   'GET /logout': 'UserController.logout',
   'GET /qa': 'QuestionController.getQA',
   'GET /response': 'ResponseController.getResponses',
-  'POST /response': 'ResponseController.newResponse',
-  'POST /question': 'QuestionController.newQuestion',
+  'GET /user-response': 'ResponseController.getUserResponses',
   'DELETE /question': 'QuestionController.deleteQuestion',
   'DELETE /answer': 'AnswerController.deleteAnswer',
-  'POST /answer': 'AnswerController.newAnswer'
+  'DELETE /response': 'ResponseControlller.deleteResponse',
 
   // '/': {
   //   view: 'homepage'
