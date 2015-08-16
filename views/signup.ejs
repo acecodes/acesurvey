@@ -16,7 +16,7 @@
     </head>
     <body ng-module="globals, homepage, signupapp" ng-cloak homepagedata signupdata globals>
     <navbar></navbar>
-</div>
+<div class="content">
 <!-- SIGNUP FORM -->
 <form ng-submit="signupapp.submitSignupForm(signupapp)" id="sign-up-form" class="form-signin" name="signup">
     <h2 class="form-signin-heading">Create an account</h2>
@@ -99,12 +99,14 @@
     </button>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
+</div>
 <footercontent></footercontent>
 <!--SCRIPTS-->
 <script src="/js/dependencies/sails.io.js"></script>
 <script src="/js/dependencies/angular.min.js"></script>
 <script src="/js/dependencies/angular-toastr.js"></script>
 <script src="/js/dependencies/compareTo.module.js"></script>
+<script src="/js/dependencies/lodash.min.js"></script>
 <script src="/js/public/global/angular.ng-modules.js"></script>
 <script src="/js/public/global/global.js"></script>
 <script src="/js/public/signup/signup.js"></script>

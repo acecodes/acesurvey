@@ -4,12 +4,20 @@
 
     function DashboardController(dashboardFactory) {
         this.questionsSeen = [];
-        this.questions = dashboardFactory.getQAs(this);
+        this.currentQuestion = {};
+        this.questionsList = [];
+        this.done = false;
+        this.responses = false;
+
+        this.adminQuestionsList = dashboardFactory.getQAs(this);
         this.createQuestion = dashboardFactory.createQuestion;
         this.createAnswer = dashboardFactory.createAnswer;
         this.getQAs = dashboardFactory.getQAs;
         this.deleteQuestion = dashboardFactory.deleteQuestion;
         this.deleteAnswer = dashboardFactory.deleteAnswer;
+        this.submitResponse = dashboardFactory.submitResponse;
+        this.presentQuestion = dashboardFactory.presentQuestion(this);
+        this.checkResponses = dashboardFactory.checkResponses;
     }
 
     DashboardController.$inject = ['dashboardFactory'];
@@ -124,12 +132,68 @@
 
                 }
 
+                function submitResponse(scope, questionId, answerId, userId) {
+                    $http.post('/response', {
+                        answer: answerId,
+                        question: questionId,
+                        user: userId
+                    }).then(function success(response) {
+
+                        var arr = scope.questionsList;
+                        var seen = scope.questionsSeen;
+                        var len = arr.length;
+
+                        seen.push(questionId);
+
+                        arr.shift();
+
+                        arr = _.shuffle(arr);
+
+                        scope.currentQuestion = arr[0];
+
+                        console.log(arr);
+                        if (arr.length === 0) {
+                            scope.done = true;
+                        }
+
+
+                        //console.log(response);
+
+                    }).catch(function failure(err) {
+                        console.log(err);
+                    });
+                }
+
+                function presentQuestion(scope) {
+
+                    $http.get('/qa').then(function success(QAs) {
+                        scope.questionsList = QAs.data;
+                        scope.questionsList = _.shuffle(scope.questionsList);
+                        scope.currentQuestion = scope.questionsList[0];
+                    });
+                }
+
+                function checkResponses(scope, questionId) {
+                    $http.get('/response', {
+                        params: {
+                            question: questionId
+                        }
+                    }).then(function success(success) {
+                        scope.responses = success.data;
+                    });
+                }
+
+
+
                 return {
                     createQuestion: createQuestion,
                     createAnswer: createAnswer,
                     getQAs: getQAs,
                     deleteQuestion: deleteQuestion,
-                    deleteAnswer: deleteAnswer
+                    deleteAnswer: deleteAnswer,
+                    submitResponse: submitResponse,
+                    presentQuestion: presentQuestion,
+                    checkResponses: checkResponses
                 };
             }
         ]);

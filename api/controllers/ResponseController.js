@@ -25,13 +25,9 @@ module.exports = {
 
     getResponses: function(req, res) {
         Response.findAll({
-            include: [{
-                model: Answer
-            }, {
-                model: Question
-            }, {
-                model: User
-            }]
+            where: {
+                question: req.param('question')
+            },
         }).then(function(responses) {
             res.json(responses);
         }).catch(function(err) {
