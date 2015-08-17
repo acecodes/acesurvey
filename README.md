@@ -1,27 +1,46 @@
-# activityOverlord v2.0
+# AceSurvey
+### An experimental application for creating and publishing short surveys.
 
-This is an application I'm building to learn Angular and how to integrate it with the new features of Sails.js v0.11.0.
+**Technology used: Node, Sails, Sequelize, MySQL, Angular, Lodash, Bootstrap (Bootswatch)**
 
-**Transcripts of screencasts** can be found at: [http://irlnathan.github.io/sailscasts/](http://irlnathan.github.io/sailscasts/)
+---
 
-**Videos** can be found at: [https://www.youtube.com/playlist?list=PLf8i4fc0zJByWVBmMk8uJ0UEhTIGMnmPQ](https://www.youtube.com/playlist?list=PLf8i4fc0zJByWVBmMk8uJ0UEhTIGMnmPQ)
+#Background
 
-**Join the mailing list** at: [http://irlnathan.github.io/sailscastsnewsletter/](http://irlnathan.github.io/sailscastsnewsletter/)
+This is my first 100% JavaScript application. I've written quite a bit of Angular code and written a decent amount of experimental Node/Express/whatever in the past, but never have I done the entire stack in one language. It was quite a learning experience and I'm glad I did it.
 
-## Creating a Sails/Angular Application (Individual Episodes)
+Since I'd never constructed a full JavaScript app before and had never once used Sails for anything, I started out by watching and coding along with [this (currently unfinished) tutorial](https://www.youtube.com/playlist?list=PLf8i4fc0zJByWVBmMk8uJ0UEhTIGMnmPQ) that provides some basic information about Sails and how to integrate it with Angular.
 
-- [Ep1: Creating a Sails/Angular Application: Intro](https://www.youtube.com/watch?v=EHIybLmoxfE)
-- [Ep2: Setting up the development enviornment and creating the project](https://www.youtube.com/watch?v=mGrKLi54Xsg)
-- [Ep3: Building an Angular Application in Sails: Understanding Asset Delivery Options in Our SignUp Page.](https://www.youtube.com/watch?v=4keciyLVPiM)
-- [Ep4: Building an Angular Application in Sails: Implementing requests in Angular to a Sails API.  Page.](https://www.youtube.com/watch?v=eOZ7n-5uASo)
-- [Ep5: Building an Angular Application in Sails: Creating custom actions and an intro to node-machines. ](https://www.youtube.com/watch?v=jaGpf7t5y0Q)
-- [Ep6: Building an Angular Application in Sails: User Authentication in Angular and Sails. ](https://www.youtube.com/watch?v=IqpjIQ0pfkA)
+That tutorial gave me a wire frame to run with and some concepts to grok before really diving in and tearing it apart - and that's exactly what I did.
 
+First of all, I had to wire up Sequelize with Sails. This was a major pain in the butt, as there is currently only one library that allows Sequelize and Sails to play along nicely and it isn't documented at all. This was compounded by the fact that the "Blueprint" syntax in Sails is very similar to Sequelize's, causing quite a few confusing and hard-to-find bugs.
 
+After that, I had to model and link questions, answers and responses. This wasn't terribly difficult, just a bit slow due to a lack of documentation for both Sails and Sequelize. The only thing I didn't accomplish as well as I would have liked was foreign key data retrieval. In the admin interface, I included a way to view answers - but Sequelize doesn't have a simple way to step through a foreign key and get the data it's attached to. So instead of being able to go through the ID and get an answer's text, I had to settle for using only the ID. Perhaps in the future I can figure out a way to do this.
 
-> Want to skip ahead?  You can check out a rough preview I did with [@mikermcneil](https://github.com/mikermcneil) at https://github.com/balderdashy/activity-overlord-2-preview.
+Design is not my strongest suite (although I am currently trying to get better by reading books, taking courses, etc.) so please keep that in mind when looking at the interface. I spruced it up a bit with Bootswatch to make it a litte more appealing.
 
-## License
+# Installation
 
-MIT
-&copy; 2015 Irl Nathan
+If you want to check this out in your local development environment, here are the steps you'll need to take:
+
+1.  Install MySQL and create a database (let's call it `acesurvey`)
+2.  Install NPM dependencies: `$ npm install`
+3.  Launch Sails: `$ sails lift`
+4.  Go to `localhost:1337` (this is Sails' default - and hilarious - port number)
+5.  Create a user.
+
+## Admin
+The admin interface is for creating questions and answers, as well as tracking data about user responses. Admins can't take quizzes. 
+
+To see the admin interface, simply click the sign up button on the front page and select "Yes" in the "Admin?" box.
+
+## User
+Users see and answer quizzes. Each question is presented in random order and will not be repeated. Once every question available has been answered, a small message will appear congratulating the user on finishing the quiz. If the user refreshes the page, they will see the quiz again in a different order.
+
+To see the user interface, click the sign up button on the front page and select "No" in the "Admin?" box.
+
+## Further Notes
+
+I commented within the code on certain improvements I felt could be made. I did not have a large amount of time to dedicate to this project, and I plan to come back to it later on.
+
+If you have any questions or comments, please feel free to send me a message on [my website](http://acecodes.net).

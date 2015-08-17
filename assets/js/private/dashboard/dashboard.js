@@ -93,15 +93,24 @@
                 }
 
                 function createAnswer(scope, questionId, answer) {
+                    
                     /*
                     Create a new question answer in the admin panel
                     */
+
                     $http.post('/answer', {
                         question: questionId,
                         answer: answer
                     }).then(function success(answer) {
                         var arr = scope.questions;
                         var len = arr.length;
+
+                        /*
+                        Future improvement: Use cleaner async methods/libraries
+                        (such as lodash) in place of for loops.
+                        */
+
+
                         for (var i = 0; i < len; i++) {
                             if (arr[i].id === questionId) {
 
@@ -136,6 +145,11 @@
                         console.log(deleted);
                         var arr = scope.questions;
                         var len = arr.length;
+
+                        /*
+                        Future improvement: Use cleaner async methods/libraries
+                        (such as lodash) in place of for loops.
+                        */
 
                         for (var i = 0; i < len; i++) {
                             if (arr[i].id === questionId) {
@@ -204,30 +218,13 @@
                             var resp = responses.data;
                             var len = resp.length;
 
-                            scope.questionsList = _.shuffle(qa);
-
                             for (var i = 0; i < len; i++) {
                                 seen.push(resp[i].question);
                             }
 
                             var qaLen = qa.length;
 
-                            /* 
-                            Determine if a question has already been seen
-                            If true, remove it from the array of questions
-                            to be presented
-                            */
-
-                            for (var j = 0; j < qaLen; j++) {
-                                if (qa[j] === undefined) {
-                                    scope.done = true;
-                                    console.log('D');
-                                    break;
-                                } else if (qa[j] !== undefined && _.includes(seen, qa[j].id)) {
-                                    qa.splice(1, j);
-                                }
-                            }
-
+                            scope.questionsList = _.shuffle(qa);
                             scope.currentQuestion = scope.questionsList[0];
 
 

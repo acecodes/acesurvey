@@ -42,8 +42,7 @@ module.exports.routes = {
   ////////////////////////////////////////////////////////////
   // JSON API
   ////////////////////////////////////////////////////////////
-
-  // User enrollment + authentication
+  
   'POST /signup': 'UserController.signup',
   'POST /answer': 'AnswerController.newAnswer',
   'POST /response': 'ResponseController.newResponse',
