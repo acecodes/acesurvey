@@ -17,7 +17,7 @@ First of all, I had to wire up Sequelize with Sails. This was a major pain in th
 
 After that, I had to model and link questions, answers and responses. This wasn't terribly difficult, just a bit slow due to a lack of documentation for both Sails and Sequelize. The only thing I didn't accomplish as well as I would have liked was foreign key data retrieval. In the admin interface, I included a way to view answers - but Sequelize doesn't have a simple way to step through a foreign key and get the data it's attached to. So instead of being able to go through the ID and get an answer's text, I had to settle for using only the ID. Perhaps in the future I can figure out a way to do this.
 
-Design is not my strongest suite (although I am currently trying to get better by reading books, taking courses, etc.) so please keep that in mind when looking at the interface. I spruced it up a bit with Bootswatch to make it a litte more appealing.
+Design is not my area of expertise (although I am currently trying to get better by reading books, taking courses, etc.) so please keep that in mind when looking at the interface. I spruced it up a bit with Bootswatch to make it a litte more appealing.
 
 # Installation
 
