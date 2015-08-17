@@ -32,6 +32,7 @@
                         <button class="btn btn-danger" type="submit">Add Question</button>
                     </form>
                     <div ng-if="dashboard.responses">
+                    <!-- FUTURE IMPROVEMENT: GRAPHS -->
                         <hr />
                         <h4>Total responses: {{ dashboard.responses.length }}</h4>
                         <hr />
@@ -42,8 +43,8 @@
                                     <th>Answer</th>
                                 </tr>
                             </thead>
-                            <tbody class="responses" ng-repeat="response in dashboard.responses">
-                                <tr>
+                            <tbody>
+                                <tr class="responses" ng-repeat="response in dashboard.responses">
                                     <td>{{ response.user }}</td>
                                     <td>{{ response.answer }}</td>
                                 </tr>
