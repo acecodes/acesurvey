@@ -169,38 +169,51 @@
                             }
                         }).then(function(responses) {
 
-                            console.log(QAs.data);
-                            console.log(responses.data);
-
                             var qa = QAs.data;
                             var seen = scope.questionsSeen;
                             var resp = responses.data;
                             var len = resp.length;
+
+                            scope.questionsList = _.shuffle(qa);
 
                             for (var i = 0; i < len; i++) {
                                 seen.push(resp[i].question);
                             }
 
                             var qaLen = qa.length;
-                            for (var j = 0; j < qaLen; j++) {
-                                if (qaLen > 0) {
-                                    for (var k = 0; k < seen.length; k++) {
-                                        if (qa[j] !== undefined && qa[j].id === seen[k]) {
-                                            qa.splice(1, j);
-                                        }
-                                    }
-                                } else {
+                            var seenLen = seen.length;
+
+                            for (var j=0; j < qaLen; j++) {
+                                if (qa[j] === undefined) {
                                     scope.done = true;
+                                    console.log('D');
                                     break;
+                                } else if (qa[j] !== undefined && _.includes(seen, qa[j].id) === true) {
+                                    qa.splice(1, j);
                                 }
                             }
 
-
-                            console.log('Questions left:', qa.length);
-                            console.log('Questions seen:', scope.questionsSeen);
-
-                            scope.questionsList = _.shuffle(qa);
                             scope.currentQuestion = scope.questionsList[0];
+
+                            // // Loop through questions and answers, then 
+                            // // remove anything that's been seen already
+                            // for (var j = 0; j < qaLen; j++) {
+                            //     if (qaLen > 0) {
+                            //         for (var k = 0; k < seenLen; k++) {
+                            //             if (qa[j] !== undefined && qa[j].id === seen[k]) {
+                            //                 qa.splice(1, j);
+                            //             }
+                            //         }
+                            //     } else {
+                            //         scope.done = true;
+                            //         break;
+                            //     }
+                            // }
+
+                            console.log('Seen:', seen);
+                            
+
+                            console.log('List: ', qa);
 
 
                         });
