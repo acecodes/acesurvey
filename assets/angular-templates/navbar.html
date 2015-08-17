@@ -1,5 +1,5 @@
 <!-- Creates the navbar -->
-<nav class="navbar navbar-fixed-top navbar-default">
+<nav class="navbar navbar-static-top navbar-default">
   <div class="container-fluid">  
     <!-- This creates the mechanism for the collapse button -->
     <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -11,7 +11,7 @@
     </button>
     <!-- This is the brand on the left-hand side. -->
     <a class="navbar-brand" href="/#"> AceSurvey</a>
-    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+    <div ng-if="!globals.userId" class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
             <!-- LOGIN FORM -->
             <form ng-submit="app.submitLoginForm(app)" class="navbar-form navbar-right">
                 <!-- E M A I L -->
@@ -30,5 +30,13 @@
                 </button>
                 <input type="hidden" name="_csrf" value="<%= _csrf %>" />
             </form>
-            </div>
+    </div>
+    <div ng-if="globals.userId" class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/logout">Sign Out</a>
+                </li>
+            </ul>
+            
+        </div>
     </nav>

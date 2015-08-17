@@ -2,7 +2,6 @@
         'use strict';
 
         function SignupController(signupFactory) {
-            // set-up loading state
             this.signupForm = {
                 loading: false
             };
@@ -30,10 +29,18 @@
 
                     function submitSignupForm(scope) {
 
-                        // Set the loading state (i.e. show loading spinner)
+                        /*
+                        Sign up for a new account.
+                        */
+
                         scope.signupForm.loading = true;
 
-                        // Submit request to Sails.
+                        /*
+                        Future improvement: use password machinepack
+                        to encrypt passwords. Note: I would NEVER
+                        use plaintext passwords in a production application.
+                        */
+
                         $http.post('/signup', {
                             name: scope.signupForm.name,
                             title: scope.signupForm.title,
@@ -46,8 +53,6 @@
                             })
                             .catch(function onError(sailsResponse) {
 
-                                // Handle known error type(s).
-                                // If using sails-disk adpater -- Handle Duplicate Key
                                 var emailAddressAlreadyInUse = sailsResponse.status === 409;
 
                                 if (emailAddressAlreadyInUse) {
@@ -63,25 +68,22 @@
 
                     function submitLoginForm(scope) {
 
-                        // Set the loading state (i.e. show loading spinner)
                         scope.loginForm.loading = true;
 
-                        // Submit request to Sails.
                         $http.put('/login', {
                             email: scope.loginForm.email,
                             password: scope.loginForm.password
                         })
                             .then(function onSuccess() {
-                                // Refresh the page now that we've been logged in.
+                                /*
+                                Future improvement: use ui-router or something similar 
+                                to make this a true SPA instead of using window
+                                */
                                 window.location = '/';
                             })
                             .catch(function onError(sailsResponse) {
 
-                                // Handle known error type(s).
-                                // Invalid username / password combination.
                                 if (sailsResponse.status === 400 || 404) {
-                                    // scope.loginForm.topLevelErrorMessage = 'Invalid email/password combination.';
-                                    //
                                     toastr.error('Invalid email/password combination.', 'Error', {
                                         closeButton: true
                                     });

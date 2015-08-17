@@ -7,10 +7,10 @@
 
 module.exports = {
 
-    /**
-     * Check the provided email address and password, and if they
-     * match a real user in the database, sign in to AceSurvey.
-     */
+    /*
+    Check the provided email address and password, and if they
+    match a real user in the database, sign in to AceSurvey.
+    */
     login: function(req, res) {
 
         User.findOne({
@@ -31,9 +31,9 @@ module.exports = {
 
     },
 
-    /**
-     * Sign up for a user account.
-     */
+    /*
+    Sign up for a user account.
+    */
     signup: function(req, res) {
 
         User.create({
@@ -56,10 +56,6 @@ module.exports = {
 
     },
 
-    /**
-     * Log out of AceSurvey.
-     * (wipes `me` from the sesion)
-     */
     logout: function(req, res) {
 
         // Look up the user record from the database which is

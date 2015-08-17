@@ -1,11 +1,9 @@
 /**
  * User.js
  *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @description :: Basic user model.
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
-
-var Sequelize = require('sequelize');
 
 module.exports = {
 
@@ -27,6 +25,11 @@ module.exports = {
             unique: true
         },
 
+        /*
+        Future improvement: use password machinepack
+        to encrypt passwords. Note: I would NEVER
+        use plaintext passwords in a production application.
+        */
         password: {
             type: Sequelize.STRING,
             required: true

@@ -17,105 +17,102 @@
         };
         </script>
     </head>
-    <body ng-modules="dashboard, globals" dashboarddata ng-cloak>
-        <dashboardnav></dashboardnav>
-        <div class="content">
-            <div class="container-fluid">
-                <!-- ADMIN SECTION -->
-                <div ng-if="<%= me.isAdmin %>">
-                    <h1 class="admin-title">Admin Dashboard</h1>
-                    <hr />
-                    
-                    <div id="add-question" class="col-md-6 questions">
-                        <h3>Add Question</h3>
-                        <form ng-submit="dashboard.createQuestion(dashboard, question.text)" id="create-question-form" class="" name="create-question">
-                            <input ng-model="question.text">
-                            <button class="btn btn-danger" type="submit">Add Question</button>
-                        </form>
-                        <div ng-if="dashboard.responses">
-                            
-                                <h4>Total responses: {{ dashboard.responses.length }}</h4>
-                                <table class="table table-striped table-hover ">
-                                    <thead>
-                                        <tr>
-                                            <th>User ID</th>
-                                            <th>Answer</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="responses" ng-repeat="response in dashboard.responses">
-                                        <tr>
-                                            <td>{{ response.user }}</td>
-                                            <td>{{ response.answer }}</td>
-
-                                        </tr>
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <!-- QUESTIONS -->
-                            <div id="questions-list" class="col-md-6 questions">
-                                <h2 id="admin-question-title">Questions</h2>
-                                <div ng-repeat="q in dashboard.questions">
-                                    <div class="qa-unit">
-                                        <p class="question-item">
-                                            <span>{{ q.title }}</span>
-                                            <a href="" ng-click="dashboard.deleteQuestion(dashboard, q.id)"><span class="glyphicon glyphicon-remove delete-question"></span></a>
-                                        </p>
-                                        <form ng-submit="dashboard.checkResponses(dashboard, q.id)" class="" name="create-answer">
-                                            <button class="btn btn-success" type="submit">View Responses</button>
-                                        </form>
-                                        <hr />
-                                        <h5>Add a new answer:</h5>
-                                        <form ng-submit="dashboard.createAnswer(dashboard, q.id, answer.text)" class="" name="create-answer">
-                                            <input ng-model="answer.text">
-                                            <button class="btn btn-danger" type="submit">Add</button>
-                                        </form>
-                                        <!-- ANSWERS -->
-                                        <p class="answers-title">Answers:</p>
-                                        <div ng-repeat="ans in q.Answers" class="answer-box">
-                                            <ul>
-                                                <li>{{ ans.answer }} (id: {{ ans.id }})
-                                                    <a href="" ng-click="dashboard.deleteAnswer(dashboard, q.id, ans.id)"><span class="glyphicon glyphicon-remove delete-question"></span></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <body ng-modules="dashboard, globals" dashboarddata globals ng-cloak>
+    <navbar></navbar>
+    <div class="content">
+        <div class="container-fluid">
+            <!-- ADMIN SECTION -->
+            <div ng-if="<%= me.isAdmin %>">
+                <h1 class="admin-title">Admin Dashboard</h1>
+                <hr />
+                <div id="add-question" class="col-md-6 questions">
+                    <h3>Add Question</h3>
+                    <form ng-submit="dashboard.createQuestion(dashboard, question.text)" id="create-question-form" class="" name="create-question">
+                        <input ng-model="question.text">
+                        <button class="btn btn-danger" type="submit">Add Question</button>
+                    </form>
+                    <div ng-if="dashboard.responses">
+                        <hr />
+                        <h4>Total responses: {{ dashboard.responses.length }}</h4>
+                        <hr />
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Answer</th>
+                                </tr>
+                            </thead>
+                            <tbody class="responses" ng-repeat="response in dashboard.responses">
+                                <tr>
+                                    <td>{{ response.user }}</td>
+                                    <td>{{ response.answer }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div ng-if="<%= !me.isAdmin %>">
-                        <!-- NON-ADMIN SECTION -->
-                        <div ng-if="dashboard.done" class="done">
-                            <h1>Congratulations!</h1>
-                            <p><strong>You've completed all of our questions!</strong></p>
-                            <p>We add new questions on a daily basis, please come back soon and answer some more!</p>
-                        </div>
-                        <div ng-if="!dashboard.done" class="question-present">
-                            <h1 id="question-title">{{ dashboard.currentQuestion.title }}</h1>
-                            {{ dashboard.presentQuestion }}
-                            <div ng-repeat="answer in dashboard.currentQuestion.Answers" class="question-answer">
-                                <a href="" ng-click="dashboard.submitResponse(dashboard, dashboard.currentQuestion.id, answer.id, <%= me.id %>)">{{ answer.answer }}</a>
-                            </div>
+                </div>
+                <!-- QUESTIONS -->
+                <div id="questions-list" class="col-md-6 questions">
+                    <h2 id="admin-question-title">Questions</h2>
+                    <div ng-repeat="q in dashboard.questions">
+                        <div class="qa-unit">
+                            <p class="question-item">
+                                <span>{{ q.title }}</span>
+                                <a href="" ng-click="dashboard.deleteQuestion(dashboard, q.id)"><span class="glyphicon glyphicon-remove delete-question"></span></a>
+                            </p>
+                            <form ng-submit="dashboard.checkResponses(dashboard, q.id)" class="" name="create-answer">
+                                <button class="btn btn-success" type="submit">View Responses</button>
+                            </form>
+                            <hr />
+                            <h5>Add a new answer:</h5>
+                            <form ng-submit="dashboard.createAnswer(dashboard, q.id, answer.text)" class="" name="create-answer">
+                                <input ng-model="answer.text">
+                                <button class="btn btn-danger" type="submit">Add</button>
+                            </form>
+                            <!-- ANSWERS -->
+                            <p class="answers-title">Answers:</p>
+                            <div ng-repeat="ans in q.Answers" class="answer-box">
+                                <p>{{ ans.answer }} (id: {{ ans.id }})
+                                    <a href="" ng-click="dashboard.deleteAnswer(dashboard, q.id, ans.id)"><span class="glyphicon glyphicon-remove delete-question"></span></a>
+                                </p>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/dependencies/angular.min.js"></script>
-    <script src="/js/dependencies/angular-toastr.js"></script>
-    <script src="/js/dependencies/compareTo.module.js"></script>
-    <script src="/js/dependencies/lodash.min.js"></script>
-    <script src="/js/public/global/angular.ng-modules.js"></script>
-    <script src="/js/public/global/global.js"></script>
-    <script src="/js/public/signup/signup.js"></script>
-    <script src="/js/private/dashboard/dashboard.js"></script>
-    <script src="/js/public/homepage/homepage.js"></script>
-    <!--SCRIPTS END-->
+    <div ng-if="<%= !me.isAdmin %>">
+        <!-- NON-ADMIN SECTION -->
+        <div ng-if="dashboard.done" class="done">
+            <h1>Congratulations!</h1>
+            <p><strong>You've completed all of our questions!</strong></p>
+            <p>We add new questions on a daily basis, please come back soon and answer some more!</p>
+        </div>
+        <div ng-if="!dashboard.done" class="question-present">
+            <h1 id="question-title">{{ dashboard.currentQuestion.title }}</h1>
+            {{ dashboard.presentQuestion }}
+            <div ng-repeat="answer in dashboard.currentQuestion.Answers" class="question-answer">
+                <a href="" ng-click="dashboard.submitResponse(dashboard, dashboard.currentQuestion.id, answer.id, <%= me.id %>)">{{ answer.answer }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dependencies/angular.min.js"></script>
+<script src="/js/dependencies/angular-toastr.js"></script>
+<script src="/js/dependencies/compareTo.module.js"></script>
+<script src="/js/dependencies/lodash.min.js"></script>
+<script src="/js/public/global/angular.ng-modules.js"></script>
+<script src="/js/public/global/global.js"></script>
+<script src="/js/public/signup/signup.js"></script>
+<script src="/js/private/dashboard/dashboard.js"></script>
+<script src="/js/public/homepage/homepage.js"></script>
+<!--SCRIPTS END-->
 <footercontent></footercontent>
 </body>
 </html>

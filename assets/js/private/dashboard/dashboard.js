@@ -39,6 +39,11 @@
             function($http) {
 
                 function createQuestion(scope, title) {
+
+                    /*
+                    Create a new question in the admin panel.
+                    */
+
                     $http.post('/question', {
                         title: title
                     }).then(function success(question) {
@@ -50,12 +55,21 @@
                 }
 
                 function getQAs(scope) {
+
+                    /*
+                    Retrieve the full list of questions and answers
+                    */
+
                     $http.get('/qa').then(function success(QAs) {
                         scope.questions = QAs.data;
                     });
                 }
 
                 function deleteQuestion(scope, questionId) {
+
+                    /*
+                    Delete a question in the admin panel
+                    */
 
                     $http.delete('/question', {
                         params: {
@@ -79,6 +93,9 @@
                 }
 
                 function createAnswer(scope, questionId, answer) {
+                    /*
+                    Create a new question answer in the admin panel
+                    */
                     $http.post('/answer', {
                         question: questionId,
                         answer: answer
@@ -103,6 +120,10 @@
                 }
 
                 function deleteAnswer(scope, questionId, answerId) {
+
+                    /*
+                    Delete a question answer in the admin panel
+                    */
 
                     var arr = scope.questions;
                     var len = arr.length;
@@ -140,6 +161,10 @@
                         user: userId
                     }).then(function success(success) {
 
+                        /*
+                        Send in a response.
+                        */
+
                         var qList = scope.questionsList;
                         console.log(scope.questionsList);
                         qList.shift();
@@ -169,6 +194,11 @@
                             }
                         }).then(function(responses) {
 
+                            /*
+                            Get questions, answers and responses for
+                            the logged-in user
+                            */
+
                             var qa = QAs.data;
                             var seen = scope.questionsSeen;
                             var resp = responses.data;
@@ -181,39 +211,24 @@
                             }
 
                             var qaLen = qa.length;
-                            var seenLen = seen.length;
 
-                            for (var j=0; j < qaLen; j++) {
+                            /* 
+                            Determine if a question has already been seen
+                            If true, remove it from the array of questions
+                            to be presented
+                            */
+
+                            for (var j = 0; j < qaLen; j++) {
                                 if (qa[j] === undefined) {
                                     scope.done = true;
                                     console.log('D');
                                     break;
-                                } else if (qa[j] !== undefined && _.includes(seen, qa[j].id) === true) {
+                                } else if (qa[j] !== undefined && _.includes(seen, qa[j].id)) {
                                     qa.splice(1, j);
                                 }
                             }
 
                             scope.currentQuestion = scope.questionsList[0];
-
-                            // // Loop through questions and answers, then 
-                            // // remove anything that's been seen already
-                            // for (var j = 0; j < qaLen; j++) {
-                            //     if (qaLen > 0) {
-                            //         for (var k = 0; k < seenLen; k++) {
-                            //             if (qa[j] !== undefined && qa[j].id === seen[k]) {
-                            //                 qa.splice(1, j);
-                            //             }
-                            //         }
-                            //     } else {
-                            //         scope.done = true;
-                            //         break;
-                            //     }
-                            // }
-
-                            console.log('Seen:', seen);
-                            
-
-                            console.log('List: ', qa);
 
 
                         });

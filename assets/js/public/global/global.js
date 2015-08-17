@@ -1,8 +1,17 @@
 (function() {
     'use strict';
 
+    /*
+    This exists solely so I can put certain repeated elements,
+    such as the navbar, into reusable templates.
+    */
+
     function GlobalController() {
-        // Nothing here for now.
+        if (window.SAILS_LOCALS.me !== undefined) {
+        this.userId = window.SAILS_LOCALS.me.id;
+    } else {
+        this.userId = false;
+    }
     }
 
     GlobalController.$inject = [];
