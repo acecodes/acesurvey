@@ -23,7 +23,8 @@ Design is not my area of expertise (although I am currently trying to get better
 
 If you want to check this out in your local development environment, here are the steps you'll need to take:
 
-1.  Install MySQL and create a database (let's call it `acesurvey`)
+1.  Clone the repo: `$ git clone https://github.com/acecodes/acesurvey` 
+2. Install MySQL and create a database (let's call it `acesurvey`) and make sure the username/password for it matches what is under `mySQL` in the `config/connections.js` file.
 2.  Install NPM dependencies: `$ npm install`
 3.  Launch Sails: `$ sails lift`
 4.  Go to `localhost:1337` (this is Sails' default - and hilarious - port number)

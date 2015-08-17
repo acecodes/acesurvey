@@ -5,6 +5,12 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
+/*
+Future improvement: use password machinepack
+to encrypt passwords. Note: I would NEVER
+use plaintext passwords in a production application.
+*/
+
 module.exports = {
 
     attributes: {
@@ -25,11 +31,6 @@ module.exports = {
             unique: true
         },
 
-        /*
-        Future improvement: use password machinepack
-        to encrypt passwords. Note: I would NEVER
-        use plaintext passwords in a production application.
-        */
         password: {
             type: Sequelize.STRING,
             required: true
